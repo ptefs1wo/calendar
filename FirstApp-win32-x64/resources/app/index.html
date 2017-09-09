@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>カレンダーアプリ</title>
+</head>
+<body>
+	<p id="day1">
+	</p>
+	<p id="weather">
+	</p>
+	<script>
+		window.nodeRequire = require;
+		delete window.require;
+		delete window.exports;
+		delete window.module;
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script>
+		let starttime=new Date();
+		const nowdate=(starttime.toLocaleString());
+		$('#day1').text(nowdate);
+		$.getJSON("http://weather.livedoor.com/forecast/webservice/json/v1?city=140020",function(json){
+			$('#weather').html('<img src="'+json["forecasts"][0]["image"]["url"]+'"</img><br>'+json["description"]["text"]);
+		});
+	</script>
+</body>
+</html>
